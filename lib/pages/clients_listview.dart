@@ -49,9 +49,9 @@ class _ClientsPageState extends State<ClientsPage> {
           "ClientsPage",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
-        backgroundColor: Colors.amber,
-        leading: const HamburgerMenu(),
+        backgroundColor: Colors.indigo,
       ),
+      drawer: const HamburgerMenu(),
       body: ListView.builder(
         itemCount: clients.length,
         itemBuilder: (context, index) {
@@ -60,10 +60,10 @@ class _ClientsPageState extends State<ClientsPage> {
             background: Container(
               color: Colors.red,
               child: Padding(
-                padding: const EdgeInsets.only(left:8.0),
+                padding: const EdgeInsets.only(left: 8.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: [Icon(Icons.delete, color: Colors.white,)],
+                  children: [Icon(Icons.delete, color: Colors.white)],
                 ),
               ),
             ),
@@ -79,9 +79,59 @@ class _ClientsPageState extends State<ClientsPage> {
       ),
 
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Icon(Icons.add),
+        onPressed: () {
+          createType(context);
+        },
+        backgroundColor: Colors.indigo,
+        child: Icon(Icons.add, color: Colors.white),
       ),
     );
   }
+}
+
+void createType(context) {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController gmailController = TextEditingController();
+
+  showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        scrollable: true,
+        backgroundColor: Colors.grey,
+        title: Text("Adicionar cliente"),
+        content: Padding(
+          padding: EdgeInsets.all(8),
+          child: Column(
+            children: [
+              TextFormField(
+                controller: nameController,
+                decoration: InputDecoration(
+                  fillColor: Colors.white,
+                  filled: true,
+                  border: UnderlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                  ),
+                  label: Text("Nome"),
+                  helper: Text.rich(
+                    TextSpan(
+                      text: 'Informativos:\n',
+
+                      children: [
+                        TextSpan(text: '1- Iniciais em maiúsculo\n'),
+                        TextSpan(text: '2- Espaços simples entre palavras'),
+                      ],
+                    ),
+                  ),
+                ),
+                autocorrect: true,
+                style: TextStyle(color: Colors.black),
+              ),
+              Padding(padding: EdgeInsets.all(8)),
+            ],
+          ),
+        ),
+      );
+    },
+  );
 }

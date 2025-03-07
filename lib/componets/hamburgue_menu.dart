@@ -24,14 +24,14 @@ class HamburgerMenu extends StatelessWidget {
           ListTile(
             title: const Text('Gerenciar clientes'),
             onTap: () {
-              Navigator.pushNamed(context, '/');
+              Navigator.popAndPushNamed(context, '/');
             },
           ),
           const Divider(),
           ListTile(
             title: const Text('Tipos de clientes'),
             onTap: () {
-              Navigator.pushNamed(context, '/tipos');
+              Navigator.popAndPushNamed(context, '/tipos');
             },
           ),
           const Divider(),
